@@ -1,6 +1,30 @@
 import { ArrowDown } from "lucide-react";
+import { useEffect, useState } from "react";
+import {cn} from "@/lib/utils";
 
 export const HeroSection = () => {
+    const [isVisible, setIsVisible] = useState(true);
+
+    useEffect(()=>{
+        const handleScroll = () => {
+            const scrollPosition = window.pageYOffset;
+            // Adjust this threshold as needed
+            if ( scrollPosition > 10) { 
+                setIsVisible(false); // Hide the div
+            } else {
+                setIsVisible(true);  // Show the div
+            }
+          };
+      
+          window.addEventListener('scroll', handleScroll);
+      
+          // Cleanup the event listener when the component unmounts
+          return () => {
+            window.removeEventListener('scroll', handleScroll);
+          };
+    },[])
+
+
     return <section 
         id="hero" 
         className="relative min-h-screen flex flex-col justify-center px-4">
@@ -21,9 +45,11 @@ export const HeroSection = () => {
                     </div>
                 </div>
             </div>
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
+
+            {isVisible  && (
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce opacity-100">
                 <span className="text-sm text-muted-foreground mb-2"> Scroll</span>
                 <ArrowDown className="h-5 w-5 text-primary"/>
-            </div>
+            </div>)}
         </section>;
 };
