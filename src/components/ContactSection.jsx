@@ -1,20 +1,49 @@
 import { Facebook, Instagram, Linkedin, Mail, Map, Phone, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useToast } from '@/hooks/use-toast'
+import { useState } from "react";
 
 export const ContactSection = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: '',
+    });
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
     const { toast } = useToast();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
+        try {
+            const response = await fetch('https://formsubmit.co/ajax/chanmacasa@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
 
-        setTimeout(() => {
-            toast({
-                title: "Message Sent!",
-                description: "Thank you for your message, I'll get back to you soon."
-            })
-        }, 1500)
+            if (response.ok) {
+                // alert('Form submitted successfully!');
+                // Optionally, clear the form or show a success message
+                setFormData({ name: '', email: '', message: '' });
+
+                setTimeout(() => {
+                    toast({
+                        title: "Message Sent!",
+                        description: "Thank you for your message, I'll get back to you soon."
+                    })
+                }, 1500)
+            }
+        } catch (e) {
+            // handle your error
+            console.error('Error submitting form:', error);
+            alert('An error occurred during form submission.');
+        }
     }
 
     return <section id="contact" className="py-24 px-4 relative bg-secondary/30">
@@ -81,30 +110,38 @@ export const ContactSection = () => {
                 </div>
                 <div className="bg-card p-8 rounded-lg shadow-x5" >
                     <h3 className="text-2xl font-semibold mb-6"> Send a Message </h3>
-                    <form className="space-y-6" action="https://formsubmit.co/chanmacasa@gmail.com" method="POST" onSubmit={handleSubmit}>
-                        <input type="text" name="_honey" id="honeyPot" className="hidden"/>
-                        <input type="hidden" name="_captcha" value="false" className="hidden"/>
+                    <form className="space-y-6" onSubmit={handleSubmit}>
+                        <input type="text" name="_honey" id="honeyPot" className="hidden" />
+                        <input type="hidden" name="_captcha" value="false" className="hidden" />
                         <div>
                             <label htmlFor="name"
                                 className="block text-sm font-medium mb-2"> Your Name</label>
                             <input text="text" id="name" name="name" required className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
-                                placeholder="John Doe..." />
+                                placeholder="John Doe..."
+                                value={formData.name}
+                                onChange={handleChange} />
                         </div>
 
                         <div>
                             <label htmlFor="email"
                                 className="block text-sm font-medium mb-2"> Your Email</label>
                             <input text="text" id="email" name="email" required className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
-                                placeholder="john.doe@gmail.com" />
+                                placeholder="john.doe@gmail.com"
+                                value={formData.email}
+                                onChange={handleChange}
+                            />
                         </div>
 
                         <div>
                             <label htmlFor="message"
                                 className="block text-sm font-medium mb-2"> Your Message</label>
                             <textarea text="text" id="message" name="message" required className="w-full h-25 px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary resize-none"
-                                placeholder="Put your message here..." />
+                                placeholder="Put your message here..."
+                                value={formData.message}
+                                onChange={handleChange}
+                            />
                         </div>
-                        <button type="submit" className={cn("cosmic-button w-full flex items-center justify-center gap-2 ") }> Send Message <Send size={16} /> </button>
+                        <button type="submit" className={cn("cosmic-button w-full flex items-center justify-center gap-2 ")}> Send Message <Send size={16} /> </button>
                     </form>
                 </div>
             </div>
