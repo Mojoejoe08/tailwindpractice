@@ -11,24 +11,24 @@ const projects = [
         demoURL: "#",
         githubUrl: "https://github.com/Mojoejoe08/Swift"
     },
-    {
-        id: 2,
-        title: "Swift Application",
-        description: "A mobile-based examination checker with item analysis through image processing techniques",
-        image: "/projects/swift.png",
-        tags: ["Native Java", "OpenCV", "VSCode"],
-        demoURL: "#",
-        githubUrl: "https://github.com/Mojoejoe08/Swift"
-    },
-    {
-        id: 3,
-        title: "Swift Application",
-        description: "A mobile-based examination checker with item analysis through image processing techniques",
-        image: "/projects/swift.png",
-        tags: ["Native Java", "OpenCV", "VSCode"],
-        demoURL: "#",
-        githubUrl: "https://github.com/Mojoejoe08/Swift"
-    }
+    // {
+    //     id: 2,
+    //     title: "Swift Application",
+    //     description: "A mobile-based examination checker with item analysis through image processing techniques",
+    //     image: "/projects/swift.png",
+    //     tags: ["Native Java", "OpenCV", "VSCode"],
+    //     demoURL: "#",
+    //     githubUrl: "https://github.com/Mojoejoe08/Swift"
+    // },
+    // {
+    //     id: 3,
+    //     title: "Swift Application",
+    //     description: "A mobile-based examination checker with item analysis through image processing techniques",
+    //     image: "/projects/swift.png",
+    //     tags: ["Native Java", "OpenCV", "VSCode"],
+    //     demoURL: "#",
+    //     githubUrl: "https://github.com/Mojoejoe08/Swift"
+    // }
 ]
 
 export const ProjectSection = () => {
