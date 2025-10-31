@@ -96,13 +96,13 @@ export const ContactSection = () => {
                     <div className="pt-8">
                         <h4 className="font-medium mb-4 "> Connect With Me</h4>
                         <div className="flex space-x-4 justify-center">
-                            <a href="#">
+                            <a href="https://www.linkedin.com/in/christianjoemacasa/">
                                 <Linkedin />
                             </a>
-                            <a href="#">
+                            <a href="https://www.instagram.com/joemacasa/">
                                 <Instagram />
                             </a>
-                            <a href="#">
+                            <a href="https://www.facebook.com/cj.macasa.2025">
                                 <Facebook />
                             </a>
                         </div>
